@@ -11,26 +11,13 @@ export default class App extends Component {
     super(props);
     this.state = {
       turn:1,
-      board:[],
-    };
-  }
-
-  componentWillMount(){
-    this.init__game__();
-  }
-
-  //init game 
-  init__game__(){
-    this.setState({
-      turn: 1,
-      board: [
+      board:[
         [0,0,0],
         [0,0,0],
         [0,0,0]
       ],
-    })
-  }
-  
+    };
+  }  
 //Function to handle touch 
 handleClick = (row, col) => {
     var my_grid = this.state.board;
