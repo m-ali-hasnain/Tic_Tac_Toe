@@ -22,6 +22,35 @@ export default function App(){
     //update States
     setBoard(my_grid);
     setTurn(newTurn);
+
+    let winner = getWinner();
+    if(winner==1 && checkTie()==false){
+      alert("Player 1 Wins");
+      setTurn(1);
+      setBoard([
+         [0,0,0],
+         [0,0,0],
+         [0,0,0],
+      ])
+    }
+    else if(winner==2 && checkTie()==false){
+      alert("Player 2 Wins")
+      setTurn(1);
+      setBoard([
+         [0,0,0],
+         [0,0,0],
+         [0,0,0],
+      ])
+    }
+    else if(checkTie()==true){
+      alert("Tie");
+      setTurn(1);
+      setBoard([
+         [0,0,0],
+         [0,0,0],
+         [0,0,0],
+      ])
+    }
   };
 
 
@@ -42,19 +71,79 @@ export default function App(){
   //function to get winner of game
   const getWinner = () => {
     var grid = board;
-    if (grid[0][0] + grid[1][1] + grid[2][2] == 3) {
+    //checking diagonals
+    if(grid[0][0]==1 && grid[1][1]==1 && grid[2][2]==1){
       return 1;
-    } else if (grid[0][0] + grid[1][1] + grid[2][2] == 6) {
-      return 2;
-    } else if (grid[2][0] + grid[1][1] + grid[1][2] == 3) {
-      return 1;
-    } else if (grid[2][0] + grid[1][1] + grid[1][2] == 6) {
+    }
+    else if(grid[0][0]==2 && grid[1][1]==2 && grid[2][2]==2){
       return 2;
     }
-    else {
+    else if(grid[2][0]==1 && grid[1][1]==1 && grid[0][2]==1){
+      return 1;
+    }
+    else if(grid[2][0]==2 && grid[1][1]==2 && grid[0][2]==2){
+      return 2;
+    }
+    //checking rows
+    else if(grid[0][0]==1 && grid[0][1]==1 && grid[0][2]==1){
+      return 1;
+    }
+    else if(grid[0][0]==2 && grid[0][1]==2 && grid[0][2]==2){
+      return 2;
+    }
+    else if(grid[1][0]==1 && grid[1][1]==1 && grid[1][2]==1){
+      return 1;
+    }
+    else if(grid[1][0]==2 && grid[1][1]==2 && grid[1][2]==2){
+      return 2;
+    }
+    else if(grid[2][0]==1 && grid[2][1]==1 && grid[2][2]==1){
+      return 1;
+    }
+    else if(grid[2][0]==2 && grid[2][1]==2 && grid[2][2]==2){
+      return 2;
+    }
+    //checking Cols
+    else if(grid[0][0]==1 && grid[1][0]==1 && grid[2][0]==1){
+      return 1;
+    }
+    else if(grid[0][0]==2 && grid[1][0]==2 && grid[2][0]==2){
+      return 2;
+    }
+    else if(grid[0][1]==1 && grid[1][1]==1 && grid[2][1]==1){
+      return 1;
+    }
+    else if(grid[0][1]==2 && grid[1][1]==2 && grid[2][1]==2){
+      return 2;
+    }
+    else if(grid[0][2]==1 && grid[1][2]==1 && grid[2][2]==1){
+      return 1;
+    }
+    else if(grid[0][2]==2 && grid[1][2]==2 && grid[2][2]==2){
+      return 2;
+    }
+    else{
       return -1;
     }
   };
+  //function to check tie
+  const checkTie = () =>{
+    var grid = board;
+    var counts = 0;
+    for(var i=0;i<3;i++){
+      for(var c=0;c<3;c++){
+        if(grid[i][c]!=0){
+          counts++;
+        }
+      }
+    }
+    if(counts==9){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
     return (
       
       <View style={styles.container}>
